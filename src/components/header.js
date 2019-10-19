@@ -1,42 +1,40 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'gatsby';
+import styled from 'styled-components';
+
+const H1 = styled.h1`
+  margin: 0;
+`;
+
+const Head = styled.header`
+  align-items: center;
+  background-color: ${props => props.theme.colours.black};
+  display: flex;
+  padding: 0.5em 1em;
+`;
+
+const StyledLink = styled(({ noUnderline, ...rest }) => <Link { ...rest } />)`
+  color: ${props => props.theme.colours.white};
+  text-decoration: ${props => props.noUnderline ? 'none' : 'underline'};
+`;
 
 const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+  <Head>
+    <H1>
+      <StyledLink noUnderline to="/">
+        {siteTitle}
+      </StyledLink>
+    </H1>
+  </Head>
+);
+
+Header.defaultProps = {
+  siteTitle: '',
+};
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
+export default Header;
